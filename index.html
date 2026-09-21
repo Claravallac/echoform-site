@@ -422,9 +422,22 @@
                   transition: transform .3s cubic-bezier(.3,1.4,.5,1), background-color .3s ease; }
   .fx-sw.on { background: var(--primary-strong); }
   .fx-sw.on::after { transform: translateX(12px); background: #fff; }
-  .fx-chips { display: flex; gap: 4px; }
-  .fx-chips span { padding: 3px 7px; border-radius: 999px; font-size: 9.5px; font-weight: 700; color: var(--fx-dim); border: 1px solid transparent; }
-  .fx-chips span.on { background: color-mix(in srgb, var(--primary) 20%, transparent); color: var(--primary); border-color: color-mix(in srgb, var(--primary) 40%, transparent); }
+  /* grupo de chips com uma pílula única que DESLIZA (posição/largura vêm do JS via --p-x / --p-w) */
+  .fx-chips { display: flex; gap: 4px; position: relative; }
+  .fx-chips::before {
+    content: ''; position: absolute; top: 0; left: 0; height: 100%; border-radius: 999px; box-sizing: border-box;
+    width: var(--p-w, 0px); transform: translateX(var(--p-x, 0px));
+    background: color-mix(in srgb, var(--primary) 20%, transparent);
+    border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+    opacity: 0; pointer-events: none;
+    transition: transform .38s cubic-bezier(.3,1.25,.5,1), width .38s cubic-bezier(.3,1.25,.5,1),
+                background-color .3s ease, border-color .3s ease, opacity .2s ease;
+  }
+  .fx-chips.pronto::before { opacity: 1; }
+  .fx-chips.sem-anim::before { transition: none; }
+  .fx-chips span { position: relative; z-index: 1; padding: 3px 7px; border-radius: 999px; font-size: 9.5px; font-weight: 700;
+                   color: var(--fx-dim); border: 1px solid transparent; transition: color .25s ease; }
+  .fx-chips span.on { color: var(--primary); }
 
   /* tema claro da demo (o próprio toggle liga isso) */
   .fx.light {
@@ -433,11 +446,13 @@
   }
   .fx.light .fx-sw { background: #d5cfe0; }
   .fx.light .fx-sw.on { background: #7a55e0; }
-  .fx.light .fx-chips span.on { color: #5a34c8; background: rgba(106,68,214,.14); border-color: rgba(106,68,214,.35); }
+  .fx.light .fx-chips::before { background: rgba(106,68,214,.14); border-color: rgba(106,68,214,.35); }
+  .fx.light .fx-chips span.on { color: #5a34c8; }
   .fx.light .fx-set-row .k { color: #6e6679; }
 
   /* quem pediu menos movimento vê o estado final, parado */
   @media (prefers-reduced-motion: reduce) {
+    .fx-chips::before, .fx-chips span { transition: none !important; }
     .fx *, .fx-fill, .fx-bar .bf { transition: none !important; animation: none !important; }
     .fx-search .caret { display: none; }
   }
@@ -578,8 +593,7 @@
 
   .companion {
     display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 20px;
+    grid-template-columns: 1fr;
     row-gap: 18px;
     align-items: center;
     background: linear-gradient(135deg, color-mix(in srgb, var(--tertiary-container) 55%, var(--card)), var(--card));
@@ -587,16 +601,6 @@
     border-radius: 18px;
     padding: 24px 26px;
   }
-
-  .companion-mark {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    flex-shrink: 0;
-    overflow: hidden;
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--tertiary) 40%, transparent);
-  }
-  .companion-mark img { width: 100%; height: 100%; display: block; }
 
   .companion-text { min-width: 0; }
 
@@ -614,7 +618,7 @@
   }
 
   .companion-links {
-    grid-column: 2;
+    grid-column: 1;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -641,6 +645,79 @@
   .companion-link:active { transform: translateY(1px); }
   .companion-link .store-glyph { flex-shrink: 0; color: var(--tertiary); }
   .companion-link .arrow { flex-shrink: 0; color: var(--ink-faint); }
+
+  /* ---------- payflow: logo animada ao lado do título ---------- */
+
+  .section-head.has-mark {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 28px;
+    align-items: center;
+  }
+  .section-head.has-mark .sh-text { min-width: 0; }
+
+  .pf-mark {
+    position: relative;
+    width: 132px; height: 132px; flex: none;
+    border-radius: 30px;
+    background: #0d0f1a;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--tertiary) 34%, transparent),
+                0 18px 44px -18px rgba(0,0,0,.75);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .pf-mark svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+
+  /* brilho de fundo que acompanha o encontro dos anéis */
+  .pf-glow {
+    position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -46px 0 0 -46px;
+    border-radius: 50%; z-index: -1; opacity: 0;
+    background: radial-gradient(closest-side, rgba(252,198,65,.30), rgba(112,231,183,.14) 55%, transparent 75%);
+  }
+
+  .pf-ring { fill: none; stroke-width: 5.9; }
+  .pf-lens { fill: rgba(255,255,255,.075); stroke: none; }
+  .pf-ring.g { stroke: #70e7b7; }
+  .pf-ring.y { stroke: #fcc641; }
+  /* onda que sai da interseção quando os anéis se encontram */
+  .pf-pulse { fill: none; stroke: #fff; stroke-width: 1.6; opacity: 0; visibility: hidden; transform-box: fill-box; transform-origin: center; }
+
+  /* Sem movimento: logo parada, no estado final (idêntica ao PNG original). */
+  .pf-ring.g { transform: translateX(0); }
+  .pf-ring.y { transform: translateX(0); }
+  .pf-glow { opacity: 0; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* a animação só começa quando a seção entra na tela (classe .go vem do JS) */
+    .pf-mark:not(.go) .pf-ring.g { transform: translateX(-46px); opacity: 0; }
+    .pf-mark:not(.go) .pf-ring.y { transform: translateX(46px);  opacity: 0; }
+    .pf-mark:not(.go) .pf-lens   { opacity: 0; }
+    .pf-mark.go .pf-lens { animation: pf-lens .5s ease-out 1s both; }
+    @keyframes pf-lens { from { opacity: 0; } to { opacity: 1; } }
+    .pf-mark:not(.go) .pf-glow   { opacity: 0; }
+
+    .pf-mark.go .pf-ring.g { animation: pf-in-g 1.5s cubic-bezier(.25,.9,.3,1.08) .15s both; }
+    .pf-mark.go .pf-ring.y { animation: pf-in-y 1.5s cubic-bezier(.25,.9,.3,1.08) .15s both; }
+    .pf-mark.go .pf-glow   { animation: pf-glow 1.7s ease-out .95s both, pf-breathe 4.8s ease-in-out 2.9s infinite; }
+    .pf-mark.go .pf-pulse  { animation: pf-pulse 1.1s cubic-bezier(.2,.7,.3,1) .95s both, pf-show 0s .95s both; }
+    @keyframes pf-show { to { visibility: visible; } }
+
+    @keyframes pf-in-g { 0% { transform: translateX(-46px) rotate(-70deg); opacity: 0; }
+                         30% { opacity: 1; }
+                         100% { transform: translateX(0) rotate(0); opacity: 1; } }
+    @keyframes pf-in-y { 0% { transform: translateX(46px) rotate(70deg); opacity: 0; }
+                         30% { opacity: 1; }
+                         100% { transform: translateX(0) rotate(0); opacity: 1; } }
+    @keyframes pf-glow { 0% { opacity: 0; transform: scale(.4); } 45% { opacity: .95; transform: scale(1.15); } 100% { opacity: .22; transform: scale(1); } }
+    @keyframes pf-breathe { 0%, 100% { opacity: .22; transform: scale(1); } 50% { opacity: .5; transform: scale(1.08); } }
+    @keyframes pf-pulse { 0% { opacity: .9; transform: scale(.2); } 100% { opacity: 0; transform: scale(3.4); } }
+    .pf-ring { transform-box: fill-box; transform-origin: center; }
+  }
+
+  @media (max-width: 640px) {
+    .section-head.has-mark { grid-template-columns: 1fr; row-gap: 22px; }
+    .section-head.has-mark .pf-mark { order: -1; width: 96px; height: 96px; border-radius: 24px; }
+  }
 
   /* ---------- downloads table ---------- */
 
@@ -705,6 +782,70 @@
   .store-card li svg { flex-shrink: 0; margin-top: 2px; }
 
   .store-card .btn { width: 100%; justify-content: center; margin-top: auto; }
+
+  /* ---------- termos de uso ---------- */
+
+  .terms-list { display: grid; gap: 12px; }
+
+  .term-item {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px 20px 19px;
+  }
+
+  .term-item .term-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: color-mix(in srgb, var(--primary) 16%, transparent);
+    color: var(--primary);
+    font-size: 11.5px; font-weight: 700;
+    margin-right: 10px; flex: none;
+  }
+
+  .term-item h3 {
+    display: flex; align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15.5px; font-weight: 600; letter-spacing: -.2px;
+    margin: 0 0 9px;
+  }
+
+  .term-item p {
+    margin: 0;
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .terms-links {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 18px;
+  }
+
+  .terms-links a {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 15px;
+    border-radius: 999px;
+    border: 1px solid var(--card-border);
+    background: var(--card);
+    color: var(--ink-dim);
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    transition: color .15s ease, border-color .15s ease, background-color .15s ease;
+  }
+  .terms-links a:hover {
+    color: var(--ink);
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--card-border));
+    background: color-mix(in srgb, var(--primary) 8%, var(--card));
+  }
+  .terms-links a svg { flex: none; opacity: .8; }
+
+  .terms-foot {
+    margin: 22px 0 0;
+    color: var(--ink-faint);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
 
   /* ---------- footer ---------- */
 
@@ -812,6 +953,7 @@
       <a href="#diffcheck" data-i18n="nav.diff">Diff Check</a>
       <a href="#payflow" data-i18n="nav.payflow">Payflow</a>
       <a href="#instalar" data-i18n="nav.install">Instalar</a>
+      <a href="#termos" data-i18n="nav.terms">Termos</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language / Idioma">
       <button type="button" data-lang="pt" aria-pressed="true">PT</button>
@@ -942,12 +1084,26 @@
 </section>
 
 <section id="payflow" class="divider-top">
-  <div class="section-head">
-    <h2 data-i18n="payflow.title">Funciona ainda melhor com o Payflow</h2>
-    <p data-i18n="payflow.subtitle">O Payflow é a extensão irmã que acompanha seus ganhos em tempo real. Com os dois instalados, o Echoform usa os valores exatos do Payflow em vez de estimativas.</p>
+  <div class="section-head has-mark">
+    <div class="sh-text">
+      <h2 data-i18n="payflow.title">Funciona ainda melhor com o Payflow</h2>
+      <p data-i18n="payflow.subtitle">O Payflow é a extensão irmã que acompanha seus ganhos em tempo real. Com os dois instalados, o Echoform usa os valores exatos do Payflow em vez de estimativas.</p>
+    </div>
+    <div class="pf-mark" id="pf-mark" aria-hidden="true">
+      <span class="pf-glow"></span>
+      <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- disco do anel verde: recorta o "miolo" claro só na interseção com o amarelo, como na logo original -->
+          <clipPath id="pf-clip-g"><circle cx="47.6" cy="63.7" r="24.6"/></clipPath>
+        </defs>
+        <!-- centros e raios medidos na logo original: verde (47.7,63.8) e amarelo (79.3,63.8), raio médio 24.6, traço 5.9 -->
+        <circle class="pf-ring g" cx="47.6" cy="63.7" r="24.6"/>
+        <circle class="pf-lens" cx="79.4" cy="63.7" r="24.6" clip-path="url(#pf-clip-g)"/>
+        <circle class="pf-ring y" cx="79.4" cy="63.7" r="24.6"/>
+        <circle class="pf-pulse" cx="63.5" cy="63.7" r="12"/>
+    </div>
   </div>
   <div class="companion">
-    <div class="companion-mark"><img src="data:image/png;base64,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" alt="Payflow"></div>
     <div class="companion-text">
       <h3 data-i18n="payflow.cardTitle">Payflow — widget de ganhos ao vivo</h3>
       <p data-i18n="payflow.cardBody">Pílula flutuante com o total ganho, cotação em tempo real e detalhamento por missão, direto na tela de curadoria.</p>
@@ -1004,12 +1160,43 @@
   </div>
 </section>
 
+<section id="termos" class="divider-top">
+  <div class="section-head">
+    <h2 data-i18n="terms.title">Termos de uso e avisos legais</h2>
+    <p data-i18n="terms.subtitle">Os mesmos avisos que a extensão mostra na primeira vez que é aberta — leia antes de instalar.</p>
+  </div>
+  <div class="terms-list">
+      <article class="term-item">
+        <h3><span class="term-num" aria-hidden="true">1</span><span data-i18n="terms.p1.title"></span></h3>
+        <p data-i18n="terms.p1.body"></p>
+      </article>
+      <article class="term-item">
+        <h3><span class="term-num" aria-hidden="true">2</span><span data-i18n="terms.p2.title"></span></h3>
+        <p data-i18n="terms.p2.body"></p>
+      </article>
+      <article class="term-item">
+        <h3><span class="term-num" aria-hidden="true">3</span><span data-i18n="terms.p3.title"></span></h3>
+        <p data-i18n="terms.p3.body"></p>
+      </article>
+      <article class="term-item">
+        <h3><span class="term-num" aria-hidden="true">4</span><span data-i18n="terms.p4.title"></span></h3>
+        <p data-i18n="terms.p4.body"></p>
+      </article>
+  </div>
+  <div class="terms-links">
+    <a href="https://about.musixmatch.com/eula" target="_blank" rel="noopener noreferrer"><span data-i18n="terms.linkEula">Termos de Uso (EULA) da Musixmatch</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="https://support.musixmatch.com/en/" target="_blank" rel="noopener noreferrer"><span data-i18n="terms.linkSupport">Central de Ajuda da Musixmatch</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <p class="terms-foot" data-i18n="terms.foot">Ao instalar e usar o Echoform, você declara ter lido e concordado com os termos e avisos acima.</p>
+</section>
+
 <footer>
   <div class="wrap">
     <span data-i18n="footer.disclaimer">Echoform — projeto independente, sem vínculo oficial com o Musixmatch.</span>
     <div class="foot-links">
       <a href="#instalar" data-i18n="nav.install">Instalar</a>
       <a href="#payflow" data-i18n="nav.payflow">Payflow</a>
+      <a href="#termos" data-i18n="nav.terms">Termos</a>
     </div>
     <p class="foot-made">
       <span data-i18n="footer.made">Feito com amor por <strong>Himari</strong></span>
@@ -1069,6 +1256,20 @@
       'install.firefoxLi1': 'Publicado na AMO, revisado pela Mozilla',
       'install.firefoxLi2': 'Mesmos recursos da versão Chrome',
       'install.firefoxBtn': 'Abrir na AMO',
+      'nav.terms': 'Termos',
+      'terms.title': 'Termos de uso e avisos legais',
+      'terms.subtitle': 'Os mesmos avisos que a extensão mostra na primeira vez que é aberta — leia antes de instalar.',
+      'terms.p1.title': 'Natureza do projeto',
+      'terms.p1.body': 'Esta é uma extensão independente e sem fins lucrativos, desenvolvida por um curador para auxiliar outros curadores a organizar e acompanhar seu próprio tempo e atividade dentro do Musixmatch Studio.',
+      'terms.p2.title': 'Funcionamento',
+      'terms.p2.body': 'A extensão não utiliza, acessa ou se conecta à API oficial da Musixmatch. Todo o seu funcionamento se limita à leitura e à medição de informações já exibidas na tela pelo navegador do próprio usuário, sem interceptar, automatizar ou alterar o envio de conteúdo em nome do curador. Não foi desenvolvida com o propósito de fraudar, burlar ou conceder qualquer vantagem indevida nos processos de curadoria ou premiação da plataforma.',
+      'terms.p3.title': 'Isenção de responsabilidade',
+      'terms.p3.body': 'O uso desta extensão é de inteira responsabilidade do usuário. O desenvolvedor não se responsabiliza por eventual mau uso da ferramenta, por decisões tomadas com base nas informações exibidas, nem por quaisquer consequências, penalidades, suspensões ou perdas decorrentes do uso da extensão.',
+      'terms.p4.title': 'Marcas registradas',
+      'terms.p4.body': '"Musixmatch", seu logotipo e demais marcas relacionadas são de propriedade exclusiva da Musixmatch. Esta extensão não é um produto oficial, não é afiliada, patrocinada ou endossada pela empresa — é um projeto independente feito apenas para ajudar o curador a gerenciar melhor seu tempo na plataforma.',
+      'terms.linkEula': 'Termos de Uso (EULA) da Musixmatch',
+      'terms.linkSupport': 'Central de Ajuda da Musixmatch',
+      'terms.foot': 'Ao instalar e usar o Echoform, você declara ter lido e concordado com os termos e avisos acima.',
       'footer.disclaimer': 'Echoform — projeto independente, sem vínculo oficial com o Musixmatch.',
       'footer.made': 'Feito com amor por <strong>Himari</strong>'
     },
@@ -1120,6 +1321,20 @@
       'install.firefoxLi1': 'Published on AMO, reviewed by Mozilla',
       'install.firefoxLi2': 'Same features as the Chrome version',
       'install.firefoxBtn': 'Open on AMO',
+      'nav.terms': 'Terms',
+      'terms.title': 'Terms of use and legal notices',
+      'terms.subtitle': 'The same notices the extension shows the first time it is opened — please read them before installing.',
+      'terms.p1.title': 'Nature of the project',
+      'terms.p1.body': 'This is an independent, non-profit extension, built by a curator to help other curators organize and track their own time and activity within Musixmatch Studio.',
+      'terms.p2.title': 'How it works',
+      'terms.p2.body': 'This extension does not use, access, or connect to the official Musixmatch API. It works solely by reading and measuring information already shown on screen by the user\u2019s own browser, without intercepting, automating, or altering submissions on the curator\u2019s behalf. It was not built to defraud, bypass, or grant any unfair advantage in the platform\u2019s curation or reward processes.',
+      'terms.p3.title': 'Disclaimer of liability',
+      'terms.p3.body': 'Use of this extension is entirely the user\u2019s own responsibility. The developer is not liable for any misuse of the tool, for decisions made based on the information displayed, or for any consequences, penalties, suspensions, or losses arising from its use.',
+      'terms.p4.title': 'Trademarks',
+      'terms.p4.body': '"Musixmatch", its logo, and related trademarks are the exclusive property of Musixmatch. This extension is not an official product and is not affiliated with, sponsored by, or endorsed by the company \u2014 it is an independent project made only to help curators manage their time on the platform.',
+      'terms.linkEula': 'Musixmatch Terms of Use (EULA)',
+      'terms.linkSupport': 'Musixmatch Help Center',
+      'terms.foot': 'By installing and using Echoform, you confirm that you have read and agree to the terms and notices above.',
       'footer.disclaimer': 'Echoform — an independent project, not officially affiliated with Musixmatch.',
       'footer.made': 'Made with love by <strong>Himari</strong>'
     }
@@ -1404,9 +1619,9 @@
                theme: 'Light theme', lang: 'Language', cur: 'Currency' }
   };
   function lang() { var d = window.__ddDict && window.__ddDict(); return (d && d['diff.replay'] === 'Watch again') ? 'en' : 'pt-BR'; }
-  function T(k) { return (FX_TXT[lang()] || FX_TXT.en)[k]; }
-  function traduzir(root) {
-    root.querySelectorAll('[data-fxk]').forEach(function (el) { el.textContent = T(el.getAttribute('data-fxk')); });
+  function T(k, forcado) { return (FX_TXT[forcado || lang()] || FX_TXT.en)[k]; }
+  function traduzir(root, forcado) {
+    root.querySelectorAll('[data-fxk]').forEach(function (el) { el.textContent = T(el.getAttribute('data-fxk'), forcado); });
   }
   var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1537,24 +1752,65 @@
     var sw = root.querySelector('[data-sw]');
     var chLang = root.querySelectorAll('[data-chips="lang"] span');
     var chCur = root.querySelectorAll('[data-chips="cur"] span');
-    function marcar(list, i) { list.forEach(function (x, k) { x.classList.toggle('on', k === i); }); }
+    /* O chip de idioma marcado dita o idioma dos rótulos da janela, sempre —
+       assim "PT" nunca aparece junto de texto em inglês, seja qual for o idioma da página. */
+    var LANG_IDX = ['pt-BR', 'en', 'en'];   /* chip -> idioma (EL não tem tradução, cai em EN) */
+    /* marca o chip ativo e move a pílula deslizante até ele */
+    function posicionar(list, animar) {
+      var grupo = list[0] && list[0].parentNode; if (!grupo) return;
+      var ativo = null; list.forEach(function (x) { if (x.classList.contains('on')) ativo = x; });
+      if (!ativo || !ativo.offsetWidth) return;      /* ainda sem layout (ex.: bloco oculto) */
+      if (!animar || !grupo.classList.contains('pronto')) grupo.classList.add('sem-anim');   /* 1ª vez / resize: sem deslizar */
+      grupo.style.setProperty('--p-x', ativo.offsetLeft + 'px');
+      grupo.style.setProperty('--p-w', ativo.offsetWidth + 'px');
+      grupo.classList.add('pronto');
+      if (grupo.classList.contains('sem-anim')) { void grupo.offsetWidth; grupo.classList.remove('sem-anim'); }
+    }
+    function marcar(list, i, animar) {
+      list.forEach(function (x, k) { x.classList.toggle('on', k === i); });
+      posicionar(list, animar !== false);
+    }
+    window.addEventListener('resize', function () { posicionar(chLang, false); posicionar(chCur, false); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { posicionar(chLang, false); posicionar(chCur, false); });
     function tema(claro) { root.classList.toggle('light', claro); sw.classList.toggle('on', claro); }
+    function idioma(i) { marcar(chLang, i); traduzir(root, LANG_IDX[i]); }
+    function resetar() { tema(false); marcar(chCur, 0); idioma(0); }
     async function cena(w) {
-      tema(false); marcar(chLang, 0); marcar(chCur, 0);
+      resetar();
       if (!(await w(1000))) return;
       tema(true);  if (!(await w(1300))) return;
-      marcar(chLang, 1); if (!(await w(900))) return;
+      idioma(1);   if (!(await w(900))) return;
       marcar(chCur, 1);  if (!(await w(1300))) return;
       tema(false); if (!(await w(800))) return;
-      marcar(chLang, 0); marcar(chCur, 0); if (!(await w(900))) return;
+      idioma(0);   marcar(chCur, 0); if (!(await w(900))) return;
     }
-    criarLoop(root, cena, function () { tema(false); marcar(chLang, 0); marcar(chCur, 0); });
+    resetar();                       /* estado inicial já coerente (PT + rótulos em português) */
+    criarLoop(root, cena, resetar);
   })();
 
   /* textos: aplica agora e a cada troca PT/EN */
-  function todos() { document.querySelectorAll('.fx').forEach(traduzir); }
+  function todos() {
+    document.querySelectorAll('.fx').forEach(function (fx) {
+      if (fx.getAttribute('data-fx') === 'config') return;   /* a cena de config traduz por conta própria */
+      traduzir(fx);
+    });
+  }
   todos();
   document.querySelectorAll('.lang-switch button').forEach(function (b) { b.addEventListener('click', function () { setTimeout(todos, 0); }); });
+})();
+</script>
+
+<script>
+/* Payflow: a logo só anima quando entra na tela (e uma única vez por visita). */
+(function () {
+  var mark = document.getElementById('pf-mark'); if (!mark) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function go() { mark.classList.add('go'); }
+  if (!('IntersectionObserver' in window)) { go(); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { go(); io.disconnect(); } });
+  }, { threshold: 0.6 });
+  io.observe(mark);
 })();
 </script>
 
