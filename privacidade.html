@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="priv.meta">Política de Privacidade — Echoform</title>
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="privacidade.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #100f13;
+    --bg-raise: #17161b;
+    --card: #1c1a20;
+    --card-border: #2c2933;
+    --ink: #e9e5ee;
+    --ink-dim: #a79fb0;
+    --ink-faint: #766e7f;
+    --primary: #c9b6ff;
+    --primary-strong: #a684ff;
+    --on-primary: #2a1857;
+    --primary-container: #453072;
+    --tertiary: #f3b6c9;
+    --tertiary-container: #5a3244;
+    --rule: #2a2731;
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1100px 560px at 18% -10%, color-mix(in srgb, var(--primary-container) 38%, transparent), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, color-mix(in srgb, var(--tertiary-container) 30%, transparent), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- nav ---------- */
+
+  header.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 24px;
+    max-width: 880px;
+    margin: 0 auto;
+    gap: 12px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -.2px;
+    flex-shrink: 0;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  nav.links {
+    display: flex;
+    gap: 22px;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+  }
+
+  nav.links a { text-decoration: none; transition: color .15s ease; }
+  nav.links a:hover { color: var(--ink); }
+
+  /* ---------- lang switch ---------- */
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 3px;
+    flex-shrink: 0;
+  }
+
+  .lang-switch button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--ink-faint);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease;
+  }
+
+  .lang-switch button[aria-pressed="true"] {
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+
+  .lang-switch button:not([aria-pressed="true"]):hover {
+    color: var(--ink);
+  }
+
+
+  /* ---------- termos de uso ---------- */
+
+  .terms-list { display: grid; gap: 12px; }
+
+  .term-item {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px 20px 19px;
+  }
+
+  .term-item .term-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: color-mix(in srgb, var(--primary) 16%, transparent);
+    color: var(--primary);
+    font-size: 11.5px; font-weight: 700;
+    margin-right: 10px; flex: none;
+  }
+
+  .term-item h3 {
+    display: flex; align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15.5px; font-weight: 600; letter-spacing: -.2px;
+    margin: 0 0 9px;
+  }
+
+  .term-item p {
+    margin: 0;
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .terms-links {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 18px;
+  }
+
+  .terms-links a {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 15px;
+    border-radius: 999px;
+    border: 1px solid var(--card-border);
+    background: var(--card);
+    color: var(--ink-dim);
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    transition: color .15s ease, border-color .15s ease, background-color .15s ease;
+  }
+  .terms-links a:hover {
+    color: var(--ink);
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--card-border));
+    background: color-mix(in srgb, var(--primary) 8%, var(--card));
+  }
+  .terms-links a svg { flex: none; opacity: .8; }
+
+  .terms-foot {
+    margin: 22px 0 0;
+    color: var(--ink-faint);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 32px 24px 40px;
+  }
+
+  footer .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+
+  footer a {
+    color: var(--ink-dim);
+    text-decoration: none;
+  }
+  footer a:hover { color: var(--ink); }
+
+  .foot-links { display: flex; gap: 18px; }
+
+  .foot-made {
+    flex-basis: 100%;
+    text-align: center;
+    margin: 10px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-dim);
+    font-size: 13px;
+  }
+  .foot-made strong { color: var(--ink); font-weight: 600; }
+  .foot-heart {
+    display: inline-block;
+    color: var(--tertiary);
+    transform-origin: center;
+    vertical-align: -2px;
+    margin-left: 2px;
+  }
+  .foot-heart svg { display: block; }
+  @media (prefers-reduced-motion: no-preference) {
+    .foot-heart { animation: heart-beat 2.4s ease-in-out infinite; }
+    @keyframes heart-beat {
+      0%, 60%, 100% { transform: scale(1); }
+      12% { transform: scale(1.22); }
+      24% { transform: scale(1); }
+      36% { transform: scale(1.14); }
+    }
+  }
+
+  
+  
+  section { padding: 48px 24px 72px; max-width: 880px; margin: 0 auto; }
+  .section-head { margin-bottom: 30px; }
+  .section-head h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(30px, 6vw, 42px);
+    font-weight: 700; letter-spacing: -1px; line-height: 1.1;
+    margin: 0 0 12px;
+  }
+  .section-head p { color: var(--ink-dim); font-size: 15px; line-height: 1.6; margin: 0; max-width: 620px; }
+  .updated {
+    display: inline-block; margin-top: 14px;
+    padding: 5px 12px; border-radius: 999px;
+    border: 1px solid var(--card-border); background: var(--card);
+    color: var(--ink-faint); font-size: 12px; font-weight: 500;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 12px 20px; border-radius: 12px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    border: 1px solid transparent; transition: background-color .15s ease, border-color .15s ease;
+  }
+  .btn-primary { background: var(--primary); color: var(--on-primary); }
+  .btn-primary:hover { background: var(--primary-strong); }
+  .btn-ghost { color: var(--ink); border-color: var(--card-border); }
+  .btn-ghost:hover { border-color: var(--ink-faint); background: var(--bg-raise); }
+
+  .toc {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 16px 20px 18px; margin-bottom: 14px;
+  }
+  .toc h2 { margin: 0 0 10px; font-family: 'Space Grotesk', sans-serif; font-size: 13px;
+    text-transform: uppercase; letter-spacing: .8px; color: var(--ink-faint); font-weight: 600; }
+  .toc ol { margin: 0; padding-left: 0; list-style: none; columns: 2; column-gap: 28px; }
+  .toc li { font-size: 13.5px; line-height: 1.9; color: var(--ink-dim); break-inside: avoid; }
+  .toc a { text-decoration: none; }
+  .toc a:hover { color: var(--primary); }
+
+  .term-item { scroll-margin-top: 20px; }
+  .term-item p + p, .term-item p + ul, .term-item ul + p { margin-top: 10px; }
+  .term-item ul { margin: 0; padding-left: 20px; color: var(--ink-dim); font-size: 14px; line-height: 1.7; }
+  .term-item li { margin-bottom: 4px; }
+  .term-item strong { color: var(--ink); font-weight: 600; }
+  .term-item a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+  .term-item a:hover { color: var(--ink); }
+  .term-item code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px;
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    padding: 1px 6px; border-radius: 5px; color: var(--primary);
+  }
+
+  .callout {
+    border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--card-border));
+    background: color-mix(in srgb, var(--primary) 9%, var(--card));
+    border-radius: 14px; padding: 16px 20px; margin-bottom: 14px;
+    font-size: 14px; line-height: 1.65; color: var(--ink);
+  }
+  .callout strong { color: var(--primary); }
+
+  .cross { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+  @media (max-width: 640px) {
+    nav.links { display: none; }
+    .toc ol { columns: 1; }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjU4MzE1OGQ2LWU4MjAtNDQ3OC1hNmVjLTZiNjA1YzA0YTlkMwAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNoBmna1zmBnnbNrJclqWUvcAAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6ZGJjNjM5YWItNGNmYi00ZjVmLWJkYmMtNDJhMjhmZTAzNDU0bHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaIDpKETQ/bXbyUuw3Ri30p8AAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIM31Sg+NcVS6XTb9Kh1WgS3+Jh9KxVrj0bcmNuKHqOerpGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2ig+183yrQX3un1E8MR0ifqAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggx/TR44o+cd1OSvThGOmQ+fJJeMQ+qmLrgZ2T1V1AP/5kbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTo1ODMxNThkNi1lODIwLTQ0NzgtYTZlYy02YjYwNWMwNGE5ZDMvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDpkZDU4NmY5MC1jYjgzLTRhNWItODI0Ny00NzM3ZDhmOTIyMjNyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggzfVKD41xVLpdNv0qHVaBLf4mH0rFWuPRtyY24oeo56uiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIHgvnhBo42YpUKRp3/Ms/BkYae4Ru1xDSW5o9yQPysAZomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIDqDPL3jN1Ot1fs2apsid9mf6y7fFEPIAyHp7q/hI0WWdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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" alt="" width="20" height="20" style="border-radius:5px; display:block;">
+    Echoform
+  </a>
+  <div class="nav-right">
+    <nav class="links">
+      <a href="index.html" data-i18n="nav.home">Início</a>
+      <a href="termos.html" data-i18n="nav.terms">Termos</a>
+      <a href="privacidade.html" data-i18n="nav.privacy">Privacidade</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language / Idioma">
+      <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="section-head">
+    <h1 data-i18n="priv.title"></h1>
+    <p data-i18n="priv.subtitle"></p>
+    <span class="updated" data-i18n="common.updated"></span>
+  </div>
+  <div class="callout" data-i18n="priv.callout"></div>
+  <nav class="toc" aria-label="Índice">
+    <h2 data-i18n="common.toc"></h2>
+    <ol><li><a href="#p-coleta" data-i18n="priv.s1.title"></a></li><li><a href="#p-armaz" data-i18n="priv.s2.title"></a></li><li><a href="#p-uso" data-i18n="priv.s3.title"></a></li><li><a href="#p-comp" data-i18n="priv.s4.title"></a></li><li><a href="#p-perm" data-i18n="priv.s5.title"></a></li><li><a href="#p-ctrl" data-i18n="priv.s6.title"></a></li><li><a href="#p-crian" data-i18n="priv.s7.title"></a></li><li><a href="#p-muda" data-i18n="priv.s8.title"></a></li><li><a href="#p-cont" data-i18n="priv.s9.title"></a></li></ol>
+  </nav>
+  <div class="terms-list">
+      <article class="term-item" id="p-coleta">
+        <h3 data-i18n="priv.s1.title"></h3>
+        <div data-i18n="priv.s1.body"></div>
+      </article>
+      <article class="term-item" id="p-armaz">
+        <h3 data-i18n="priv.s2.title"></h3>
+        <div data-i18n="priv.s2.body"></div>
+      </article>
+      <article class="term-item" id="p-uso">
+        <h3 data-i18n="priv.s3.title"></h3>
+        <div data-i18n="priv.s3.body"></div>
+      </article>
+      <article class="term-item" id="p-comp">
+        <h3 data-i18n="priv.s4.title"></h3>
+        <div data-i18n="priv.s4.body"></div>
+      </article>
+      <article class="term-item" id="p-perm">
+        <h3 data-i18n="priv.s5.title"></h3>
+        <div data-i18n="priv.s5.body"></div>
+      </article>
+      <article class="term-item" id="p-ctrl">
+        <h3 data-i18n="priv.s6.title"></h3>
+        <div data-i18n="priv.s6.body"></div>
+      </article>
+      <article class="term-item" id="p-crian">
+        <h3 data-i18n="priv.s7.title"></h3>
+        <div data-i18n="priv.s7.body"></div>
+      </article>
+      <article class="term-item" id="p-muda">
+        <h3 data-i18n="priv.s8.title"></h3>
+        <div data-i18n="priv.s8.body"></div>
+      </article>
+      <article class="term-item" id="p-cont">
+        <h3 data-i18n="priv.s9.title"></h3>
+        <div data-i18n="priv.s9.body"></div>
+      </article>
+  </div>
+  <div class="cross">
+    <a class="btn btn-primary" href="termos.html" data-i18n="common.seeTerms"></a>
+    <a class="btn btn-ghost" href="index.html" data-i18n="common.back"></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span data-i18n="footer.disclaimer"></span>
+    <div class="foot-links">
+      <a href="index.html" data-i18n="nav.home">Início</a>
+      <a href="termos.html" data-i18n="nav.terms">Termos</a>
+      <a href="privacidade.html" data-i18n="nav.privacy">Privacidade</a>
+    </div>
+    <p class="foot-made">
+      <span data-i18n="footer.made"></span>
+      <span class="foot-heart" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.2c-.3 0-.6-.1-.8-.3C6.4 17 3 13.9 3 9.9 3 7.2 5.1 5 7.7 5c1.6 0 3.1.8 4.3 2.3C13.2 5.8 14.7 5 16.3 5 18.9 5 21 7.2 21 9.9c0 4-3.4 7.1-8.2 11-.2.2-.5.3-.8.3z"/></svg></span>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var I18N = {"pt-BR": {"nav.home": "Início", "nav.terms": "Termos", "nav.privacy": "Privacidade", "footer.disclaimer": "Echoform — projeto independente, sem vínculo oficial com o Musixmatch.", "footer.made": "Feito com amor por <strong>Himari</strong>", "common.updated": "Última atualização: 21 de setembro de 2026", "common.toc": "Nesta página", "common.back": "Voltar ao site", "common.seePrivacy": "Ver Política de Privacidade", "common.seeTerms": "Ver Termos de Uso", "priv.meta": "Política de Privacidade — Echoform", "priv.title": "Política de Privacidade", "priv.subtitle": "Esta política explica, de forma direta, quais dados o Echoform (extensão de navegador) acessa, onde eles ficam guardados e o que nunca acontece com eles.", "priv.callout": "<strong>Resumo:</strong> o Echoform guarda tudo <strong>localmente, no seu próprio navegador</strong>. O desenvolvedor não tem servidor, não recebe seus dados, não usa análise/telemetria, não vende nem compartilha informações com terceiros para publicidade.", "priv.s1.title": "1. Quais dados o Echoform acessa", "priv.s1.body": "<p>O Echoform é uma extensão que funciona <strong>apenas</strong> nas páginas do Musixmatch Curators Studio. Para oferecer as funções descritas no site, ela lê informações que já estão sendo exibidas pelo Studio no seu navegador:</p><ul><li><strong>Dados das músicas que você envia:</strong> título, artista, missão, capa, data e horário do envio e o texto da letra.</li><li><strong>Dados de ganhos por missão:</strong> valores exibidos pela plataforma, usados para calcular totais e resumos.</li><li><strong>Preferências da extensão:</strong> tema, idioma, moeda, opções do painel e versões de letra salvas para o Diff Check.</li></ul><p>A extensão <strong>não</strong> coleta senhas, dados de pagamento, e-mail, endereço, localização, histórico de navegação nem qualquer conteúdo fora do Musixmatch Curators Studio.</p>", "priv.s2.title": "2. Onde os dados ficam guardados", "priv.s2.body": "<p>Todos os dados listados acima são armazenados <strong>localmente no seu dispositivo</strong>, usando o armazenamento da própria extensão/navegador (<code>storage</code> / <code>localStorage</code>). Eles permanecem no seu computador ou aparelho e <strong>não são enviados ao desenvolvedor</strong> nem a qualquer servidor do Echoform — não existe servidor do Echoform.</p><p>Se você desinstalar a extensão ou limpar os dados dela pelo navegador, esses dados são apagados.</p>", "priv.s3.title": "3. Para que os dados são usados", "priv.s3.body": "<p>Os dados são usados <strong>exclusivamente</strong> para fazer a extensão funcionar para você: montar o histórico de envios, calcular ganhos, gerar ciclos e resumos mensais, comparar versões de letra no Diff Check e lembrar suas configurações.</p><p>Os dados <strong>não</strong> são usados para publicidade, criação de perfis, análise de comportamento, determinação de crédito ou qualquer finalidade alheia ao funcionamento da extensão.</p>", "priv.s4.title": "4. Compartilhamento com terceiros", "priv.s4.body": "<p>O desenvolvedor <strong>não vende, aluga, transfere nem compartilha</strong> seus dados com terceiros. Não há SDKs de análise, rastreadores, anúncios ou telemetria na extensão.</p><p>Há apenas conexões que a extensão faz <strong>a partir do seu navegador</strong> para recursos pontuais, sem enviar seus dados pessoais ou seu histórico de envios:</p><ul><li><strong>Cotação de moedas:</strong> consulta a um serviço público de taxas de câmbio, para converter valores de USD para a moeda escolhida. Nenhum dado seu é enviado — só se pede a cotação.</li><li><strong>Bandeiras de moedas:</strong> imagens públicas carregadas de um repositório aberto, apenas para exibição.</li><li><strong>Verificação de atualização:</strong> quando aplicável, a loja de extensões do seu navegador gerencia as atualizações.</li><li><strong>Compartilhar link (opcional):</strong> se você <em>escolher</em> compartilhar um diff por link, o conteúdo desse diff é enviado a um serviço de encurtamento de links <strong>apenas naquele momento e por iniciativa sua</strong>.</li></ul><p>Esses serviços têm suas próprias políticas de privacidade, das quais o Echoform não é parte.</p>", "priv.s5.title": "5. Permissões da extensão", "priv.s5.body": "<p>As permissões solicitadas ao navegador servem <strong>apenas</strong> para o funcionamento descrito nesta política:</p><ul><li><strong>Acesso ao site do Musixmatch Curators Studio:</strong> necessário para ler as informações exibidas na tela e mostrar o painel, os botões e o Diff Check ali.</li><li><strong>Armazenamento (<code>storage</code>):</strong> para guardar localmente seu histórico e suas configurações.</li><li><strong>Acesso a serviços de cotação/atualização:</strong> para as consultas listadas na seção 4.</li></ul><p>A extensão não injeta código em outros sites e não lê abas que não sejam do Musixmatch Curators Studio.</p>", "priv.s6.title": "6. Seu controle sobre os dados", "priv.s6.body": "<p>Você tem controle total. Pode a qualquer momento <strong>exportar, editar ou apagar</strong> os dados pelo painel da própria extensão, ou removê-los por completo desinstalando a extensão ou limpando os dados do site/extensão pelo navegador.</p><p>Como o desenvolvedor não recebe nem guarda seus dados, não há cópia em servidor para solicitar acesso ou exclusão — tudo o que existe está no seu dispositivo.</p>", "priv.s7.title": "7. Crianças", "priv.s7.body": "<p>O Echoform é voltado a curadores do Musixmatch Curators Studio e não se destina a menores de 13 anos. Não coletamos intencionalmente informações de crianças.</p>", "priv.s8.title": "8. Alterações desta política", "priv.s8.body": "<p>Esta política pode ser atualizada para refletir mudanças na extensão ou na lei. A data da última atualização aparece no topo da página. Mudanças relevantes serão indicadas nesta mesma página.</p>", "priv.s9.title": "9. Contato", "priv.s9.body": "<p>Dúvidas sobre privacidade? Abra uma solicitação no repositório do projeto: <a href=\"https://github.com/Claravallac/mxm-studio-log-de-envios/issues\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Claravallac/mxm-studio-log-de-envios</a>.</p><p>Esta política vale para o Echoform nas versões publicadas na Chrome Web Store e no Firefox (addons.mozilla.org).</p>", "terms.meta": "Termos de Uso — Echoform", "terms.title": "Termos de Uso e Avisos Legais", "terms.subtitle": "Os mesmos avisos que a extensão mostra na primeira vez que é aberta — leia antes de instalar.", "terms.s1.title": "1. Natureza do projeto", "terms.s1.body": "<p>Esta é uma extensão independente e sem fins lucrativos, desenvolvida por um curador para auxiliar outros curadores a organizar e acompanhar seu próprio tempo e atividade dentro do Musixmatch Studio.</p>", "terms.s2.title": "2. Funcionamento", "terms.s2.body": "<p>A extensão não utiliza, acessa ou se conecta à API oficial da Musixmatch. Todo o seu funcionamento se limita à leitura e à medição de informações já exibidas na tela pelo navegador do próprio usuário, sem interceptar, automatizar ou alterar o envio de conteúdo em nome do curador. Não foi desenvolvida com o propósito de fraudar, burlar ou conceder qualquer vantagem indevida nos processos de curadoria ou premiação da plataforma.</p>", "terms.s3.title": "3. Uso permitido", "terms.s3.body": "<p>Você pode usar o Echoform gratuitamente, para fins pessoais, respeitando os Termos de Uso da própria Musixmatch. É proibido usar a extensão para violar regras da plataforma, ou redistribuí-la fingindo ser um produto oficial da Musixmatch.</p>", "terms.s4.title": "4. Isenção de responsabilidade", "terms.s4.body": "<p>O uso desta extensão é de inteira responsabilidade do usuário. O desenvolvedor não se responsabiliza por eventual mau uso da ferramenta, por decisões tomadas com base nas informações exibidas, nem por quaisquer consequências, penalidades, suspensões ou perdas decorrentes do uso da extensão. A extensão é fornecida “como está”, sem garantias de qualquer tipo.</p>", "terms.s5.title": "5. Marcas registradas", "terms.s5.body": "<p>“Musixmatch”, seu logotipo e demais marcas relacionadas são de propriedade exclusiva da Musixmatch. Esta extensão não é um produto oficial, não é afiliada, patrocinada ou endossada pela empresa — é um projeto independente feito apenas para ajudar o curador a gerenciar melhor seu tempo na plataforma.</p>", "terms.s6.title": "6. Privacidade e alterações", "terms.s6.body": "<p>O tratamento de dados está descrito na <a href=\"privacidade.html\">Política de Privacidade</a>. Estes termos podem ser atualizados; continuar usando o Echoform após uma atualização significa concordar com a versão vigente.</p><p>Ao instalar e usar o Echoform, você declara ter lido e concordado com os termos e avisos acima.</p>", "terms.linkEula": "Termos de Uso (EULA) da Musixmatch", "terms.linkSupport": "Central de Ajuda da Musixmatch"}, "en": {"nav.home": "Home", "nav.terms": "Terms", "nav.privacy": "Privacy", "footer.disclaimer": "Echoform — an independent project, not officially affiliated with Musixmatch.", "footer.made": "Made with love by <strong>Himari</strong>", "common.updated": "Last updated: September 21, 2026", "common.toc": "On this page", "common.back": "Back to site", "common.seePrivacy": "View Privacy Policy", "common.seeTerms": "View Terms of Use", "priv.meta": "Privacy Policy — Echoform", "priv.title": "Privacy Policy", "priv.subtitle": "This policy explains, plainly, what data the Echoform browser extension accesses, where it is stored, and what never happens to it.", "priv.callout": "<strong>Summary:</strong> Echoform stores everything <strong>locally, in your own browser</strong>. The developer runs no server, receives none of your data, uses no analytics or telemetry, and does not sell or share information with third parties for advertising.", "priv.s1.title": "1. What data Echoform accesses", "priv.s1.body": "<p>Echoform is an extension that works <strong>only</strong> on Musixmatch Curators Studio pages. To provide the features described on the site, it reads information that Studio is already displaying in your browser:</p><ul><li><strong>Data about songs you submit:</strong> title, artist, mission, cover art, submission date and time, and the lyrics text.</li><li><strong>Earnings data per mission:</strong> values shown by the platform, used to compute totals and summaries.</li><li><strong>Extension preferences:</strong> theme, language, currency, panel options, and saved lyric versions for Diff Check.</li></ul><p>The extension does <strong>not</strong> collect passwords, payment data, email, address, location, browsing history, or any content outside Musixmatch Curators Studio.</p>", "priv.s2.title": "2. Where the data is stored", "priv.s2.body": "<p>All data listed above is stored <strong>locally on your device</strong>, using the extension's/browser's own storage (<code>storage</code> / <code>localStorage</code>). It stays on your computer or phone and is <strong>not sent to the developer</strong> or to any Echoform server — there is no Echoform server.</p><p>If you uninstall the extension or clear its data in your browser, this data is deleted.</p>", "priv.s3.title": "3. What the data is used for", "priv.s3.body": "<p>The data is used <strong>solely</strong> to make the extension work for you: building your submission history, calculating earnings, generating cycles and monthly summaries, comparing lyric versions in Diff Check, and remembering your settings.</p><p>The data is <strong>not</strong> used for advertising, profiling, behavioral analysis, creditworthiness, or any purpose unrelated to the extension's functionality.</p>", "priv.s4.title": "4. Sharing with third parties", "priv.s4.body": "<p>The developer does <strong>not sell, rent, transfer, or share</strong> your data with third parties. There are no analytics SDKs, trackers, ads, or telemetry in the extension.</p><p>The extension only makes a few connections <strong>from your browser</strong> for specific features, without sending your personal data or submission history:</p><ul><li><strong>Currency rates:</strong> a lookup to a public exchange-rate service to convert USD to your chosen currency. None of your data is sent — only the rate is requested.</li><li><strong>Currency flags:</strong> public images loaded from an open repository, for display only.</li><li><strong>Update checks:</strong> where applicable, your browser's extension store manages updates.</li><li><strong>Share link (optional):</strong> if you <em>choose</em> to share a diff by link, that diff's content is sent to a link-shortening service <strong>only at that moment and at your initiative</strong>.</li></ul><p>These services have their own privacy policies, to which Echoform is not a party.</p>", "priv.s5.title": "5. Extension permissions", "priv.s5.body": "<p>The permissions requested from the browser are used <strong>only</strong> for the functionality described in this policy:</p><ul><li><strong>Access to the Musixmatch Curators Studio site:</strong> required to read the information shown on screen and to display the panel, buttons and Diff Check there.</li><li><strong>Storage (<code>storage</code>):</strong> to keep your history and settings locally.</li><li><strong>Access to rate/update services:</strong> for the lookups listed in section 4.</li></ul><p>The extension does not inject code into other sites and does not read tabs that are not Musixmatch Curators Studio.</p>", "priv.s6.title": "6. Your control over the data", "priv.s6.body": "<p>You are in full control. At any time you can <strong>export, edit, or delete</strong> your data from the extension's own panel, or remove it entirely by uninstalling the extension or clearing site/extension data in your browser.</p><p>Because the developer neither receives nor stores your data, there is no server-side copy to request access to or deletion of — everything that exists is on your device.</p>", "priv.s7.title": "7. Children", "priv.s7.body": "<p>Echoform is aimed at Musixmatch Curators Studio curators and is not intended for children under 13. We do not knowingly collect information from children.</p>", "priv.s8.title": "8. Changes to this policy", "priv.s8.body": "<p>This policy may be updated to reflect changes in the extension or the law. The date of the last update appears at the top of the page. Significant changes will be noted on this same page.</p>", "priv.s9.title": "9. Contact", "priv.s9.body": "<p>Privacy questions? Open a request in the project repository: <a href=\"https://github.com/Claravallac/mxm-studio-log-de-envios/issues\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Claravallac/mxm-studio-log-de-envios</a>.</p><p>This policy applies to Echoform as published on the Chrome Web Store and on Firefox (addons.mozilla.org).</p>", "terms.meta": "Terms of Use — Echoform", "terms.title": "Terms of Use and Legal Notices", "terms.subtitle": "The same notices the extension shows the first time it is opened — please read them before installing.", "terms.s1.title": "1. Nature of the project", "terms.s1.body": "<p>This is an independent, non-profit extension, built by a curator to help other curators organize and track their own time and activity within Musixmatch Studio.</p>", "terms.s2.title": "2. How it works", "terms.s2.body": "<p>This extension does not use, access, or connect to the official Musixmatch API. It works solely by reading and measuring information already shown on screen by the user’s own browser, without intercepting, automating, or altering submissions on the curator’s behalf. It was not built to defraud, bypass, or grant any unfair advantage in the platform’s curation or reward processes.</p>", "terms.s3.title": "3. Permitted use", "terms.s3.body": "<p>You may use Echoform free of charge, for personal purposes, while respecting Musixmatch’s own Terms of Use. You may not use the extension to violate platform rules, or redistribute it pretending to be an official Musixmatch product.</p>", "terms.s4.title": "4. Disclaimer of liability", "terms.s4.body": "<p>Use of this extension is entirely the user’s own responsibility. The developer is not liable for any misuse of the tool, for decisions made based on the information displayed, or for any consequences, penalties, suspensions, or losses arising from its use. The extension is provided “as is”, without warranties of any kind.</p>", "terms.s5.title": "5. Trademarks", "terms.s5.body": "<p>“Musixmatch”, its logo, and related trademarks are the exclusive property of Musixmatch. This extension is not an official product and is not affiliated with, sponsored by, or endorsed by the company — it is an independent project made only to help curators manage their time on the platform.</p>", "terms.s6.title": "6. Privacy and changes", "terms.s6.body": "<p>Data handling is described in the <a href=\"privacidade.html\">Privacy Policy</a>. These terms may be updated; continuing to use Echoform after an update means you accept the current version.</p><p>By installing and using Echoform, you confirm that you have read and agree to the terms and notices above.</p>", "terms.linkEula": "Musixmatch Terms of Use (EULA)", "terms.linkSupport": "Musixmatch Help Center"}};
+  var STORAGE_KEY = 'echoform_lang';
+  var htmlRoot = document.getElementById('html-root');
+
+  function detectDefaultLang() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === 'pt-BR' || saved === 'en') return saved;
+    } catch (e) {}
+    var nav = (navigator.language || 'en').toLowerCase();
+    return nav.indexOf('pt') === 0 ? 'pt-BR' : 'en';
+  }
+
+  function applyLang(lang) {
+    var dict = I18N[lang] || I18N.en;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var v = dict[el.getAttribute('data-i18n')];
+      if (v === undefined) return;
+      if (el.tagName === 'TITLE') document.title = v; else el.innerHTML = v;
+    });
+    htmlRoot.setAttribute('lang', lang === 'pt-BR' ? 'pt-BR' : 'en');
+    document.querySelectorAll('.lang-switch button').forEach(function (b) {
+      var on = (b.getAttribute('data-lang') === 'pt') === (lang === 'pt-BR');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      applyLang(b.getAttribute('data-lang') === 'pt' ? 'pt-BR' : 'en');
+    });
+  });
+  applyLang(detectDefaultLang());
+})();
+</script>
+</body>
+</html>
